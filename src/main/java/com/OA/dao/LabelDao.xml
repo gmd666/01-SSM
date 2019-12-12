@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="com.OA.dao.LabelDao">
+    <resultMap id="labelResultMap" type="com.OA.beans.Label">
+        <id property="id" column="ID"></id>
+        <result property="labelName" column="label_name"></result>
+        <result property="labelContent" column="label_content"></result>
+        <result property="pid" column="pid"></result>
+    </resultMap>
+    <select id="findAllLabels" resultMap="labelResultMap">
+          select * from newlabel
+    </select>
+    <insert id="addLabel" parameterType="label">
+          insert into newlabel(label_name,label_content,pid) values (#{labelName},#{labelContent},#{pid})
+    </insert>
+    <!--修改标签-->
+    <update id="modifyLabel" parameterType="label">
+       update newlabel set label_name=#{labelName},label_content=#{labelContent},pid=#{pid} where ID=#{id}
+    </update>
+    <!--删除标签-->
+    <delete id="deleteById" parameterType="Integer">
+        delete from newlabel where ID=#{id2}
+    </delete>
+</mapper>
